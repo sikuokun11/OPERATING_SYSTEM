@@ -1,0 +1,1 @@
+cmd_/home/duytan/Desktop/Project2_hdh/hook/hook/hooking.ko := ld -r -m elf_x86_64 -z max-page-size=0x200000 -T ./scripts/module-common.lds --build-id  -o /home/duytan/Desktop/Project2_hdh/hook/hook/hooking.ko /home/duytan/Desktop/Project2_hdh/hook/hook/hooking.o /home/duytan/Desktop/Project2_hdh/hook/hook/hooking.mod.o ;  true

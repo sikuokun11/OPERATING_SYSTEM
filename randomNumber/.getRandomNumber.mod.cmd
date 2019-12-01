@@ -1,0 +1,1 @@
+cmd_/home/duytan/Desktop/doan/randomNumber/getRandomNumber.mod := { echo  /home/duytan/Desktop/doan/randomNumber/getRandomNumber.o; echo; } > /home/duytan/Desktop/doan/randomNumber/getRandomNumber.mod
