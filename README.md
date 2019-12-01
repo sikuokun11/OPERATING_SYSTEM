@@ -3,7 +3,7 @@
 LINUX KERNEL MODULE
 & SYSTEM CALL HOOKING
 
-##*		MÔ TẢ TỔ CHỨC, THIẾT KẾ CỦA LINUX KERNEL PHÁT SINH SỐ NGẪU NHIÊN
+*		MÔ TẢ TỔ CHỨC, THIẾT KẾ CỦA LINUX KERNEL PHÁT SINH SỐ NGẪU NHIÊN
 
 1) Cấu trúc:
 - Chương trình sẽ gồm file testForUser.c để gọi xuống kernel module được tạo để phát sinh số ngẫu nhiên 
@@ -106,7 +106,7 @@ o	Hàm này chỉ đơn giản là thực hiện việc hiển thị thông báo
 o	Thiết bị device tạo ra có tên là randomNumberDevice và được chứa trong thư mục /dev/randomNumberDevice
 o	Ta tiến hành mở file chứa device với mục đích read thông qua hàm open("/dev/randomNumberDevice", O_RDONLY).Kết quả trả về không âm sẽ thành công và ngược lại
 o	Sau đó đọc giá trị random number qua hàm ssize_t read(int fd, void *buf, size_t count) và hiển thị giá trị number nhận được
-##*			3	TEST CASE LINUX KERNEL
+*			3	TEST CASE LINUX KERNEL
 - Biên dịch chương trình:
 ![Uploading 2.png…]()
  
@@ -117,7 +117,7 @@ o	Sau đó đọc giá trị random number qua hàm ssize_t read(int fd, void *b
 - Đóng chương trình và hiển thị các thông báo khi đã thực hiện từ đầu lúc khởi tạo đến hiện giờ phía system:
 
 ![3](https://user-images.githubusercontent.com/53389111/69915718-cca7a980-1484-11ea-853e-5e00a2674f96.png)
-##*			4	MÔ TẢ TỔ CHỨC, THIẾT KẾ CỦA SYSTEM CALL HOOKING
+*			4	MÔ TẢ TỔ CHỨC, THIẾT KẾ CỦA SYSTEM CALL HOOKING
 1) Cấu trúc:
 - Chương trình sẽ gồm file testForUser.c để test hook syscall open và hook syscall write 
 
@@ -160,7 +160,7 @@ Hàm asmlinkage long	open(const char __user * pathname, int flags, mode_t mode )
 o	Tiến hành mở file test ra bằng lệnh open
 o	Sau đó ghi dùng hàn write để ghi dữ liệu xuống
 o	Các quá trình mở file và ghi dữ liệu sẽ được xử lí và hiển thị khi gõ dmesg
-##*				5 TEST CASE SYSCALL HOOK
+*				5 TEST CASE SYSCALL HOOK
 
 - Biên dịch chương trình
  
@@ -172,7 +172,7 @@ o	Các quá trình mở file và ghi dữ liệu sẽ được xử lí và hi�
 
 - Hiển thị các thông báo trong dmesg
  ![7](https://user-images.githubusercontent.com/53389111/69915837-0a590200-1486-11ea-8471-22e2f27dd503.png)
-6 Tài liệu tham khảo
+*				 Tài liệu tham khảo
 1) http://derekmolloy.ie/writing-a-linux-kernel-module-part-2-a-character-device/
 2) Tài liệu hường dẫn thực hành HĐH CQ_2017/33
 3) https://uwnthesis.wordpress.com/2016/12/26/basics-of-making-a-rootkit-from-syscall-to-hook/
