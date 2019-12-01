@@ -115,6 +115,7 @@ o	Sau đó đọc giá trị random number qua hàm ssize_t read(int fd, void *b
 
  
 - Đóng chương trình và hiển thị các thông báo khi đã thực hiện từ đầu lúc khởi tạo đến hiện giờ phía system:
+![aa](https://user-images.githubusercontent.com/53389111/69915984-d7b00900-1487-11ea-963e-e3f0dc496a77.png)
 
 
 *			4	MÔ TẢ TỔ CHỨC, THIẾT KẾ CỦA SYSTEM CALL HOOKING
@@ -131,7 +132,7 @@ o	Sau đó đọc giá trị random number qua hàm ssize_t read(int fd, void *b
  
 
 - Tuy nhiên cách làm trên sẽ không linh hoạt vì khi mang sang xây dựng một kernel khác thì địa chỉ đó sẽ thay đổi.
-![aa](https://user-images.githubusercontent.com/53389111/69915984-d7b00900-1487-11ea-963e-e3f0dc496a77.png)
+
 - Do vậy ta sẽ tiến hành tìm địa tự động tìm địa chỉ tự động cho bảng system call và thực hiện hook đối với 2 syscall open và write theo các bước sau: 
 	+ Tìm tự động địa chỉ của bảng system call và lưu lại
 	+ Xây dựng 2 hàm hook open và hook write
