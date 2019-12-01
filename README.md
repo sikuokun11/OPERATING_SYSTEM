@@ -111,6 +111,55 @@ o	Sau đó đọc giá trị random number qua hàm ssize_t read(int fd, void *b
 ![Uploading 2.png…]()
  
 -Thực thi chương trình phía user:
+
+![2](https://user-images.githubusercontent.com/53389111/69915711-bdc0f700-1484-11ea-8a16-f3bc6bf3bf92.png)
  
 - Đóng chương trình và hiển thị các thông báo khi đã thực hiện từ đầu lúc khởi tạo đến hiện giờ phía system:
+
+![3](https://user-images.githubusercontent.com/53389111/69915718-cca7a980-1484-11ea-853e-5e00a2674f96.png)
+4	MÔ TẢ TỔ CHỨC, THIẾT KẾ CỦA SYSTEM CALL HOOKING
+1) Cấu trúc:
+- Chương trình sẽ gồm file testForUser.c để test hook syscall open và hook syscall write 
+
+- File hook_into_sys.c để xây dựng một Loadable Kenel Module để nạp và tháo ra khỏi kernel nhằm để chiếm quyền thực thi kernel mode
+
+-Theo như tài liệu tham khảo, ta có thể hook thủ công bằng cách dụng lệnh cat/boot/System.map-<version_kernel> | grep sys_call_table như hình
+![4](https://user-images.githubusercontent.com/53389111/69915744-142e3580-1485-11ea-8576-4151d21de92e.png)
+
+
+
+ 
+
+- Tuy nhiên cách làm trên sẽ không linh hoạt vì khi mang sang xây dựng một kernel khác thì địa chỉ đó sẽ thay đổi.
+
+- Do vậy ta sẽ tiến hành tìm địa tự động tìm địa chỉ tự động cho bảng system call và thực hiện hook đối với 2 syscall open và write theo các bước sau: 
+	+ Tìm tự động địa chỉ của bảng system call và lưu lại
+	+ Xây dựng 2 hàm hook open và hook write
+	+ Thay đổi kernel function pointer của system call cần hook thành địa chỉ của hàm hook khi gởi tạo module. Cần có hàm hỗ trợ tắt memory protection
+	+ Phục hồi lại địa chỉ gốc ban đầu của system call được hook khi tháo module ra, bật lại memory protection.
+
+2) Các tham số,biến môi trường quan trọng:
+•	unsinged long **sys_call_table: chứa địa chỉ của system call table
+ 3) Các hàm quan trọng được sử dụng:
+•	asmlinkage int ( *original_write ) ( unsigned int, const char __user *, size_t ) : chứa địa chỉ syscall write và thực thi hàm write tự tạo
+•	asmlinkage long ( *original_open ) (const char __user *, int, mode_t ): chứa địa chỉ syscall open và thực thi việc đọc dữ liệu
+•	asmlinkage int	write(unsigned int fd,const char __user *buf,size_t count ):  hàm thực hiện việc hook vào syscall write
+•	static void allow_write(void): tắt memmory protection
+•	static void disallow_write(void): bật memory protection trở lại
+•	static int init_mod(void): hàm bắt đầu việc hook
+•	static void exit_mod(void): hàm kết thúc quá trình hook
+4) Thiết kế hook open và hook write
+Hàm static int init_mod(void):  Đầu tiên sẽ tiến hành tìm địa chỉ bảng syscall table và lưu lại vào biến môi trường sys_call_table qua hàm kallsyms_lookup_name("sys_call_table") . Sau đó, tiến hành lưu địa chỉ của syscall open và syscall write lại, lưu vào original open và original write đã trình bày bên trên. Kế tiếp để tiến hành hook open và hook write ta sẽ tiến hành tắt memory protection thông qua hàm allow_write và disallow_write sau khi hook xong
+
+Hàm static void exit_mod(void): Sau khi hook xong,trước khi kết thúc chương trình sẽ trả lại địa chỉ cho syscall open và syscall write như ban đầu, bật lại memory protection
+
+Hàm asmlinkage int write(unsigned int fd,const char __user *buf,size_t count ) : Hàm này sẽ tiến hành hook vào syscall write nhưng đã được thiết lập để  chỉ hiển thị ra những thông tin liên quan đến file user thực thi, nhận vào file thực thi, chuỗi và kích thước chuỗi cần ghi. Kết thúc hàm sẽ hiển thị ra thông tin chuỗi ghi và kích thước chuỗi ghi
+
+Hàm asmlinkage long	open(const char __user * pathname, int flags, mode_t mode ) : Hàm này sẽ tiến hành hook vào syscall open nhưng cũng đã được thiết lập để hiển thị ra nhưng thông tin liên quan đến file user thực thi, nhận vào đường dẫn, chế độ thực thi trên file(O_RDONLY, O_WRONLY | O_CREAT | O_TRUNC). Kết thúc hàm sẽ hiển thị thông báo cho ta biết được tên file đọc, cũng như tên của tiến trình đang thực thi việc đọc file đó.
+5) Thiết kế file thực thi phía user
+o	Tiến hành mở file test ra bằng lệnh open
+o	Sau đó ghi dùng hàn write để ghi dữ liệu xuống
+o	Các quá trình mở file và ghi dữ liệu sẽ được xử lí và hiển thị khi gõ dmesg
+
+
 
