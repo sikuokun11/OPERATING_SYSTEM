@@ -3,9 +3,9 @@
 LINUX KERNEL MODULE
 & SYSTEM CALL HOOKING
 
-###2	MÔ TẢ TỔ CHỨC, THIẾT KẾ CỦA LINUX KERNEL PHÁT SINH SỐ NGẪU NHIÊN
+*		MÔ TẢ TỔ CHỨC, THIẾT KẾ CỦA LINUX KERNEL PHÁT SINH SỐ NGẪU NHIÊN
 
-##1) Cấu trúc:
+1) Cấu trúc:
 - Chương trình sẽ gồm file testForUser.c để gọi xuống kernel module được tạo để phát sinh số ngẫu nhiên 
 - Kernel module được tạo sẽ nằm bên dưới kernel space trong file getRandomNumber.c, sẽ tiến hành tạo ra số ngẫu nhiên và gởi lại cho user khi được yêu cầu
 -Ngoài ra ta sẽ tiến hành tạo thêm Makefile và Kbuild để biên dịch chương trình
@@ -13,7 +13,7 @@ LINUX KERNEL MODULE
 
 
 
-##2) Các tham số, biến môi trường có trong kernel module phát sinh số ngẫu nhiên
+2) Các tham số, biến môi trường có trong kernel module phát sinh số ngẫu nhiên
 a) Struct file_operators:
 struct file_operations fops=
 {
