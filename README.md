@@ -9,7 +9,7 @@ LINUX KERNEL MODULE
 - Chương trình sẽ gồm file testForUser.c để gọi xuống kernel module được tạo để phát sinh số ngẫu nhiên 
 - Kernel module được tạo sẽ nằm bên dưới kernel space trong file getRandomNumber.c, sẽ tiến hành tạo ra số ngẫu nhiên và gởi lại cho user khi được yêu cầu
 -Ngoài ra ta sẽ tiến hành tạo thêm Makefile và Kbuild để biên dịch chương trình
-![11](https://imgur.com/zOKNH94)
+<img src="https://imgur.com/zOKNH94">
  
 
 
