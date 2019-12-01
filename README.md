@@ -111,12 +111,12 @@ o	Sau đó đọc giá trị random number qua hàm ssize_t read(int fd, void *b
 ![2](https://user-images.githubusercontent.com/53389111/69915918-07aadc80-1487-11ea-89e5-7096ea5e3f7d.png)
  
 -Thực thi chương trình phía user:
+![3](https://user-images.githubusercontent.com/53389111/69915718-cca7a980-1484-11ea-853e-5e00a2674f96.png)
 
-![2](https://user-images.githubusercontent.com/53389111/69915711-bdc0f700-1484-11ea-8a16-f3bc6bf3bf92.png)
  
 - Đóng chương trình và hiển thị các thông báo khi đã thực hiện từ đầu lúc khởi tạo đến hiện giờ phía system:
 
-![3](https://user-images.githubusercontent.com/53389111/69915718-cca7a980-1484-11ea-853e-5e00a2674f96.png)
+
 *			4	MÔ TẢ TỔ CHỨC, THIẾT KẾ CỦA SYSTEM CALL HOOKING
 1) Cấu trúc:
 - Chương trình sẽ gồm file testForUser.c để test hook syscall open và hook syscall write 
@@ -131,7 +131,7 @@ o	Sau đó đọc giá trị random number qua hàm ssize_t read(int fd, void *b
  
 
 - Tuy nhiên cách làm trên sẽ không linh hoạt vì khi mang sang xây dựng một kernel khác thì địa chỉ đó sẽ thay đổi.
-
+![aa](https://user-images.githubusercontent.com/53389111/69915984-d7b00900-1487-11ea-963e-e3f0dc496a77.png)
 - Do vậy ta sẽ tiến hành tìm địa tự động tìm địa chỉ tự động cho bảng system call và thực hiện hook đối với 2 syscall open và write theo các bước sau: 
 	+ Tìm tự động địa chỉ của bảng system call và lưu lại
 	+ Xây dựng 2 hàm hook open và hook write
