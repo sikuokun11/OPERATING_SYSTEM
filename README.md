@@ -160,6 +160,25 @@ Hàm asmlinkage long	open(const char __user * pathname, int flags, mode_t mode )
 o	Tiến hành mở file test ra bằng lệnh open
 o	Sau đó ghi dùng hàn write để ghi dữ liệu xuống
 o	Các quá trình mở file và ghi dữ liệu sẽ được xử lí và hiển thị khi gõ dmesg
+5 TEST CASE SYSCALL HOOK
+
+- Biên dịch chương trình
+ 
+  ![5](https://user-images.githubusercontent.com/53389111/69915813-d41b8280-1485-11ea-860e-e9c00b125d5f.png)
+
+- Cài đặt kernel, thực thi chương trình và gỡ bỏ kernel:
+![6](https://user-images.githubusercontent.com/53389111/69915832-ff9e6d00-1485-11ea-83bf-8c9324f43f7e.png)
+ 
+
+- Hiển thị các thông báo trong dmesg
+ ![7](https://user-images.githubusercontent.com/53389111/69915837-0a590200-1486-11ea-8471-22e2f27dd503.png)
+6 Tài liệu tham khảo
+1) http://derekmolloy.ie/writing-a-linux-kernel-module-part-2-a-character-device/
+2) Tài liệu hường dẫn thực hành HĐH CQ_2017/33
+3) https://uwnthesis.wordpress.com/2016/12/26/basics-of-making-a-rootkit-from-syscall-to-hook/
+4) https://stackoverflow.com/
+
+
 
 
 
