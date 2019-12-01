@@ -108,7 +108,7 @@ o	Ta tiến hành mở file chứa device với mục đích read thông qua hà
 o	Sau đó đọc giá trị random number qua hàm ssize_t read(int fd, void *buf, size_t count) và hiển thị giá trị number nhận được
 *			3	TEST CASE LINUX KERNEL
 - Biên dịch chương trình:
-![Uploading 2.png…]()
+![2](https://user-images.githubusercontent.com/53389111/69915918-07aadc80-1487-11ea-89e5-7096ea5e3f7d.png)
  
 -Thực thi chương trình phía user:
 
