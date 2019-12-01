@@ -106,4 +106,11 @@ o	Hàm này chỉ đơn giản là thực hiện việc hiển thị thông báo
 o	Thiết bị device tạo ra có tên là randomNumberDevice và được chứa trong thư mục /dev/randomNumberDevice
 o	Ta tiến hành mở file chứa device với mục đích read thông qua hàm open("/dev/randomNumberDevice", O_RDONLY).Kết quả trả về không âm sẽ thành công và ngược lại
 o	Sau đó đọc giá trị random number qua hàm ssize_t read(int fd, void *buf, size_t count) và hiển thị giá trị number nhận được
+3	TEST CASE LINUX KERNEL
+- Biên dịch chương trình:
+![Uploading 2.png…]()
+ 
+-Thực thi chương trình phía user:
+ 
+- Đóng chương trình và hiển thị các thông báo khi đã thực hiện từ đầu lúc khởi tạo đến hiện giờ phía system:
 
